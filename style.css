@@ -1,16 +1,12 @@
+
 :root {
     --color-main: #46487c;
-    --color-accent: #6167ee;
+    --color-accent: #4f55d8;
     --color-accent-light: #258dec;
-
     --color-text: #222;
     --color-bg: #fff;
-
-    --shadow:
-        0 10px 30px rgba(0,0,0,.08);
-
+    --shadow: 0 10px 30px rgba(0, 0, 0, .08);
     --transition: .3s ease;
-
     --header-height: 80px;
 }
 
@@ -31,22 +27,18 @@ html {
 
 body {
     margin: 0;
+    padding-top: var(--header-height);
     color: var(--color-text);
     background: var(--color-bg);
-
     font-family:
-        "Open Sans",
+        "Hiragino Kaku Gothic ProN",
+        "Hiragino Sans",
         "Noto Sans JP",
+        Meiryo,
         sans-serif;
-
     font-size: clamp(14px, 1vw, 18px);
     line-height: 1.8;
     overflow-x: hidden;
-}
-
-img {
-    width: 100%;
-    display: block;
 }
 
 a {
@@ -70,16 +62,8 @@ ul {
 }
 
 .section {
-    padding: 20px 0;
-}
-
-.section-alt {
-    background:
-        linear-gradient(
-            180deg,
-            #fff,
-            #f7fbff
-        );
+    padding-top: 40px;
+    padding-bottom: 120px;
 }
 
 /* =========================
@@ -89,15 +73,11 @@ ul {
 .header {
     position: fixed;
     inset: 0 0 auto 0;
-
+    height: var(--header-height);
     z-index: 9999;
-
-    background: rgba(255,255,255,.9);
-
+    background: rgba(255, 255, 255, .9);
     backdrop-filter: blur(10px);
-
-    border-bottom:
-        1px solid rgba(0,0,0,.06);
+    border-bottom: 1px solid rgba(0, 0, 0, .06);
 }
 
 .header-inner {
@@ -118,6 +98,7 @@ ul {
 }
 
 .logo-subtitle {
+    display: block;
     margin: 0;
     font-size: .8rem;
     color: var(--color-accent);
@@ -126,13 +107,16 @@ ul {
 }
 
 .logo-title {
+    display: block;
     margin: 0;
-    font-size:1.8rem;
+    font-size: 1.8rem;
+    font-weight: 700;
     color: var(--color-main);
     line-height: 1.25;
 }
 
-.logo-highlight {
+.logo-em {
+    font-style: normal;
     color: var(--color-main);
 }
 
@@ -147,25 +131,19 @@ ul {
 
 .nav-list a {
     position: relative;
-
     font-size: .95rem;
     font-weight: 600;
-
     transition: var(--transition);
 }
 
 .nav-list a::after {
     content: "";
-
     position: absolute;
     left: 0;
     bottom: -6px;
-
     width: 0%;
     height: 2px;
-
     background: var(--color-accent);
-
     transition: var(--transition);
 }
 
@@ -183,26 +161,20 @@ ul {
 
 .hamburger {
     display: none;
-
     flex: 0 0 auto;
     width: 44px;
     height: 44px;
     padding: 10px 6px;
-
     background: none;
     border: none;
-
     cursor: pointer;
 }
 
 .hamburger span {
     display: block;
-
     width: 100%;
     height: 2px;
-
     background: var(--color-main);
-
     transition: var(--transition);
 }
 
@@ -217,24 +189,18 @@ ul {
 
     .hamburger {
         display: flex;
-
         flex-direction: column;
         justify-content: space-between;
     }
 
     .nav {
         position: fixed;
-
-        top: var(--header-height, 80px);
+        top: var(--header-height);
         right: -100%;
-
         width: min(82vw, 320px);
-        height: calc(100svh - var(--header-height, 80px));
-
+        height: calc(100svh - var(--header-height));
         background: white;
-
         box-shadow: var(--shadow);
-
         transition: var(--transition);
         overflow-y: auto;
     }
@@ -245,7 +211,6 @@ ul {
 
     .nav-list {
         padding: 2rem;
-
         flex-direction: column;
         gap: 1.25rem;
     }
@@ -264,39 +229,88 @@ ul {
 }
 
 /* =========================
-   Section
+   Section Heading
 ========================= */
-
-.section-heading {
-    margin-bottom: 3rem;
-}
-
-.section-label {
-    color: var(--color-accent);
-
-    font-size: .85rem;
-    font-weight: 700;
-
-    letter-spacing: .15em;
-}
 
 .section-title {
     display: inline-block;
-
     margin: .3em 0;
-
-    font-size:
-        clamp(2rem, 4vw, 3rem);
-
-    background:
-        linear-gradient(
-            transparent 75%,
-            color-mix(in srgb, var(--color-accent-light), #fff 80%) 75%
-        );
+    font-size: clamp(2rem, 4vw, 3rem);
+    background: linear-gradient(
+        transparent 75%,
+        color-mix(in srgb, var(--color-accent-light), #fff 80%) 75%
+    );
 }
 
-.section-text {
-    font-size: 1rem;
+/* =========================
+   Breadcrumb
+========================= */
+
+.breadcrumb {
+    font-size: .9rem;
+    font-weight: 450;
+    color: #666;
+    margin-bottom: 10px;
+}
+
+.breadcrumb a:hover {
+    color: var(--color-accent);
+    text-decoration: underline;
+}
+
+/* =========================
+   Category
+========================= */
+
+.category-title {
+    font-size: 1.4rem;
+    color: var(--color-main);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    padding-left: 8px;
+    border-left: 4px solid var(--color-accent);
+}
+
+/* =========================
+   Content List
+========================= */
+
+.content-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0;
+    margin: 0;
+}
+
+.content-link {
+    display: block;
+    padding: 14px 20px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-weight: 600;
+    color: var(--color-text);
+    transition: all var(--transition);
+}
+
+.content-link:hover {
+    background: #fff;
+    border-color: var(--color-accent);
+    color: var(--color-accent);
+    transform: translateX(4px);
+    box-shadow: var(--shadow);
+}
+
+.content-link.is-test {
+    background: color-mix(in srgb, var(--color-accent-light) 8%, #fff);
+    border-color: color-mix(in srgb, var(--color-accent-light) 20%, #fff);
+}
+
+.content-link.is-test:hover {
+    background: #fff;
+    border-color: var(--color-accent-light);
+    color: var(--color-accent-light);
 }
 
 /* =========================
@@ -305,39 +319,30 @@ ul {
 
 .to-top-btn {
     position: fixed;
-
+    left: auto;
     right: 24px;
     bottom: 24px;
-
     width: 56px;
     height: 56px;
-
     display: grid;
     place-items: center;
-
     border: none;
     border-radius: 50%;
-
     background: var(--color-main);
     color: white;
-
     cursor: pointer;
-
     opacity: 0;
     pointer-events: none;
-
     transition: var(--transition);
-
     box-shadow: var(--shadow);
+    z-index: 9999;
 }
 
 .to-top-icon {
     width: 16px;
     height: 16px;
-
     border-top: 3px solid currentColor;
     border-left: 3px solid currentColor;
-
     transform: translateY(4px) rotate(45deg);
 }
 
@@ -350,6 +355,24 @@ ul {
     transform: translateY(-4px);
 }
 
+/* =========================
+   Accessibility
+========================= */
+
+a:focus-visible,
+button:focus-visible {
+    outline: 3px solid var(--color-accent-light);
+    outline-offset: 3px;
+}
+
+section[id] {
+    scroll-margin-top: var(--header-height);
+}
+
+/* =========================
+   Responsive
+========================= */
+
 @media (max-width: 640px) {
     body {
         font-size: 15px;
@@ -360,11 +383,8 @@ ul {
     }
 
     .section {
-        padding: 20px 0;
-    }
-
-    .section-heading {
-        margin-bottom: 2rem;
+        padding-top: 24px;
+        padding-bottom: 72px;
     }
 
     .logo-subtitle {
@@ -376,21 +396,13 @@ ul {
         font-size: clamp(1rem, 5vw, 1.35rem);
     }
 
-    .hero-content {
-        width: min(100% - 32px, 1100px);
-        padding-block: 56px 88px;
-    }
-
-    .hero-title {
-        font-size: clamp(2.4rem, 14vw, 4rem);
-    }
-
-    .hero-description {
-        font-size: .95rem;
-    }
-
     .section-title {
-        font-size: clamp(1.25rem, 5vw, 2.4rem);
+        font-size: clamp(1.75rem, 9vw, 2.4rem);
+    }
+
+    .content-link {
+        padding: 12px 16px;
+        font-size: .95rem;
     }
 
     .to-top-btn {
@@ -404,99 +416,35 @@ ul {
 @media (max-width: 420px) {
     .header-inner {
         width: min(100% - 24px, 1200px);
-        min-height: var(--header-height);
+        min-height: 72px;
     }
 
     .nav-list {
         padding: 1.5rem;
     }
 
-    .container,
-    .hero-content {
+    .container {
         width: min(100% - 24px, 1100px);
     }
 
     .section {
-        padding: 20px 0;
+        padding-top: 20px;
+        padding-bottom: 60px;
     }
 }
 
 /* =========================
-   追加・調整スタイル
+   Reduced Motion
 ========================= */
 
-/* ヘッダー固定によるコンテンツの隠れ防止 */
-.main-content {
-    padding-top: 80px; /* ヘッダーの高さ分、上部をあける */
-}
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
 
-/* パンくずリスト */
-.breadcrumb {
-    font-size: 0.9rem;
-    font-weight: 450;
-    color: #666;
-    margin-bottom: 10px;
-}
-.breadcrumb a:hover {
-    color: var(--color-accent);
-    text-decoration: underline;
-}
-
-/* カテゴリの見出し（有機化学） */
-.category-title {
-    font-size: 1.4rem;
-    color: var(--color-main);
-    margin-top: 2rem;
-    margin-bottom: 1rem;
-    padding-left: 8px;
-    border-left: 4px solid var(--color-accent);
-}
-
-/* コンテンツリストのレイアウト */
-.content-list {
-    display: flex;
-    flex-direction: column;
-    gap: 12px; /* リンク同士の間隔 */
-    padding: 0;
-    margin: 0;
-}
-
-/* リンクボタンの共通デザイン */
-.content-link {
-    display: block;
-    padding: 14px 20px;
-    background: #f8fafc;
-    border: 1px solid #e2e8f0;
-    border-radius: 8px;
-    font-weight: 600;
-    color: var(--color-text);
-    transition: all var(--transition);
-}
-
-/* ホバー時の動き */
-.content-link:hover {
-    background: #fff;
-    border-color: var(--color-accent);
-    color: var(--color-accent);
-    transform: translateX(4px); /* 少し右にずれて動くエフェクト */
-    box-shadow: var(--shadow);
-}
-
-/* ★テスト系コンテンツの特別デザイン */
-.content-link.is-test {
-    background: color-mix(in srgb, var(--color-accent-light) 8%, #fff);
-    border-color: color-mix(in srgb, var(--color-accent-light) 20%, #fff);
-}
-.content-link.is-test:hover {
-    background: #fff;
-    border-color: var(--color-accent-light);
-    color: var(--color-accent-light);
-}
-
-/* スマホ表示での調整 */
-@media (max-width: 640px) {
-    .content-link {
-        padding: 12px 16px;
-        font-size: 0.95rem;
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
     }
 }

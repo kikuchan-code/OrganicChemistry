@@ -1,0 +1,250 @@
+/* =========================================================
+   クイズ／まとめページ共通スタイル
+   ../style.css（サイト共通）の後に読み込むこと
+========================================================= */
+
+:root {
+    --border: #dfe5ec;
+    --correct-bg: #d4edda;
+    --correct-border: #28a745;
+    --wrong-bg: #f8d7da;
+    --wrong-border: #dc3545;
+    --show-answer-bg: #cfe2ff;
+    --show-answer-border: #4d8dff;
+}
+
+/* style.css の img { width: 100% } を打ち消す */
+.quiz-page img {
+    width: auto;
+    max-width: 100%;
+    margin-inline: auto;
+}
+
+.quiz-page .section {
+    padding-bottom: 60px;
+}
+
+/* ---------- 説明文 ---------- */
+
+.description {
+    margin-bottom: 18px;
+    padding: 14px 18px;
+    line-height: 1.8;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+}
+
+.description p {
+    margin: 0;
+}
+
+.description img {
+    margin-bottom: 12px;
+}
+
+/* ---------- コントロール ---------- */
+
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+.controls-group {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+}
+
+.controls input[type="number"],
+.controls select {
+    padding: 6px 10px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font: inherit;
+    font-size: .95rem;
+}
+
+.controls input[type="number"] {
+    width: 70px;
+}
+
+.buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.controls button {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 10px;
+    background: var(--color-accent);
+    color: #fff;
+    font: inherit;
+    font-size: .95rem;
+    cursor: pointer;
+    transition: background var(--transition), transform .15s;
+}
+
+.controls button:hover:not(:disabled) {
+    background: var(--color-main);
+    transform: translateY(-1px);
+}
+
+.controls button:active:not(:disabled) {
+    transform: scale(.98);
+}
+
+.controls button:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+}
+
+.score {
+    font-weight: 600;
+    color: var(--color-main);
+}
+
+/* ---------- テーブル ---------- */
+
+.table-wrap {
+    overflow-x: auto;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+}
+
+.table-wrap table {
+    width: 100%;
+    border-collapse: collapse;
+    background: #fff;
+}
+
+.table-wrap th,
+.table-wrap td {
+    padding: 10px;
+    border: 1px solid var(--border);
+    text-align: center;
+    vertical-align: middle;
+}
+
+.table-wrap th {
+    background: var(--color-accent);
+    color: #fff;
+}
+
+/* 穴埋め表（行ごとにセルを虫食いにするタイプ） */
+.data-table {
+    min-width: 1200px;
+    table-layout: fixed;
+}
+
+.data-table.wide {
+    min-width: 1500px;
+}
+
+.data-table td {
+    word-break: break-word;
+}
+
+.data-table.left td {
+    text-align: left;
+}
+
+.data-table.left th:nth-child(1) { width: 15%; }
+.data-table.left th:nth-child(2) { width: 15%; }
+.data-table.left th:nth-child(3) { width: 25%; }
+.data-table.left th:nth-child(4) { width: 45%; }
+
+/* 反応経路の図 */
+.reaction-table {
+    min-width: 1200px;
+}
+
+.reaction-table td {
+    white-space: nowrap;
+}
+
+/* ---------- 入力欄 ---------- */
+
+.blank-input {
+    min-width: 100px;
+    max-width: 100%;
+    padding: 8px 10px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    font: inherit;
+    font-size: .95rem;
+    text-align: center;
+    transition: border-color .2s, background .2s;
+}
+
+.blank-input:focus {
+    outline: none;
+    border-color: var(--color-accent);
+}
+
+.blank-input.correct {
+    background: var(--correct-bg);
+    border-color: var(--correct-border);
+}
+
+.blank-input.wrong {
+    background: var(--wrong-bg);
+    border-color: var(--wrong-border);
+}
+
+.blank-input.show-answer {
+    background: var(--show-answer-bg);
+    border-color: var(--show-answer-border);
+}
+
+.blank-input:read-only {
+    cursor: default;
+}
+
+/* まとめページ：穴になる部分を強調表示 */
+.summary .cloze {
+    color: var(--color-accent);
+    font-weight: 700;
+}
+
+.footer-note {
+    margin: 16px 0 0;
+    color: #666;
+    font-size: .9rem;
+}
+
+/* ---------- スマホ ---------- */
+
+@media (max-width: 800px) {
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .controls-group {
+        justify-content: space-between;
+    }
+
+    .buttons {
+        flex-direction: column;
+    }
+
+    .controls button {
+        width: 100%;
+    }
+
+    .table-wrap th,
+    .table-wrap td {
+        padding: 8px;
+        font-size: .85rem;
+    }
+}

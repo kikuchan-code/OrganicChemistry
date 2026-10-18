@@ -4,345 +4,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>アセチレンの反応まとめ</title>
-  <style>
-        :root {
-            --main: #6167ee;
-            --main-dark: #46487c;
-            --bg: #f5f7fb;
-            --card: #ffffff;
-            --border: #dfe5ec;
-            --correct-bg: #d4edda;
-            --correct-border: #28a745;
-            --wrong-bg: #f8d7da;
-            --wrong-border: #dc3545;
-            --show-answer-bg: #cfe2ff;
-            --show-answer-border: #4d8dff;
-        }
+    <title>官能基テスト</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="quiz.css">
+    <!-- 標準的なファビコン（16x16 / 32x32など） -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.ico">
 
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: var(--bg);
-            color: #222;
-        }
-
-        h1 {
-            margin: 10px 0 0;
-            font-size: 1.5rem;
-        }
-
-        main {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 16px;
-        }
-
-        .card {
-            background: var(--card);
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-        }
-
-        .top-bar {
-            margin-bottom: 20px;
-        }
-
-        .back-link {
-            color: var(--main);
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: bold;
-        }
-
-        .back-link:hover {
-            color: var(--main-dark);
-            text-decoration: underline;
-        }
-
-        .description {
-            margin-bottom: 18px;
-            line-height: 1.7;
-        }
-
-        .controls {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            align-items: center;
-            margin-bottom: 18px;
-        }
-
-        .controls-group {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 14px;
-            border-radius: 12px;
-        }
-
-        input[type="number"] {
-            width: 60px;
-            padding: 6px;
-        }
-
-        button {
-            border: none;
-            background: var(--main);
-            color: white;
-            padding: 10px 16px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 0.95rem;
-            transition: 0.2s;
-        }
-
-        button:hover {
-            background: var(--main-dark);
-            transform: translateY(-1px);
-        }
-
-        .Table {
-            width: 100%;
-            max-height: 600px;
-            overflow: auto;
-            border-radius: 12px;
-        }
-
-        table {
-            border-collapse: collapse;
-            width: 100%;
-            min-width: 1200px;
-            table-layout: auto;
-        }
-
-        th,
-        td {
-            border: 1px solid var(--border);
-            padding: 10px;
-            text-align: center;
-            vertical-align: middle;
-            white-space: nowrap;
-        }
-
-        th {
-            background: var(--main);
-            color: white;
-            position: sticky;
-            top: 0;
-            z-index: 10;
-        }
-
-        input[type="text"] {
-            width: 150px;
-            padding: 8px;
-            border: 2px solid #ccc;
-            border-radius: 8px;
-            font-size: 0.95rem;
-        }
-
-        input.correct {
-            background: var(--correct-bg);
-            border-color: var(--correct-border);
-        }
-
-        input.wrong {
-            background: var(--wrong-bg);
-            border-color: var(--wrong-border);
-        }
-
-        input.show-answer,
-        .show-answer {
-            background: var(--show-answer-bg);
-            border-color: var(--show-answer-border);
-        }
-
-        .footer-note {
-            margin-top: 16px;
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        @media (max-width: 800px) {
-            main {
-                padding: 10px;
-            }
-
-            .controls {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .controls-group {
-                justify-content: space-between;
-            }
-
-            button {
-                width: 100%;
-            }
-
-            th,
-            td {
-                font-size: 0.85rem;
-                padding: 8px;
-            }
-        }
-    </style>
+    <!-- Apple Touch Icon (iPhoneなど) -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 </head>
 
-<body>
-    <main>
-        <div class="card">
-            <div class="top-bar">
-                <a href="../index.html" class="back-link">
-                    ← TOP
-                </a>
-                <h1>アセチレンの反応まとめ</h1>
+<body class="quiz-page">
 
-            </div>
+    <header class="header">
+        <div class="header-inner">
+            <a href="https://study.kikuchan-code.workers.dev/" class="logo">
+                <p class="logo-subtitle">高専生の基礎学習をサポート</p>
+                <span class="logo-title">Base Study Hub <em class="logo-em">KOSEN</em></span>
+            </a>
 
-            <div class="Table">
-                <table>
-                    <tr>
-                        <td rowspan="2">(<span class="cloze">炭化カルシウム</span>)<br>
-                            (<span class="cloze">カーバイド</span>)：別名<br>
-                            (<span class="cloze">CaC2</span>)</td>
-                        <td>---------→</td>
-                        <td rowspan="2">アセチレン<br>C<sub>2</sub>H<sub>2</sub>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>(<span class="cloze">H2O</span>)を付加</td>
-                    </tr>
+            <button class="hamburger" id="hamburger" aria-label="メニューを開く">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
 
-                    <tr>
-                        <td rowspan="2">アセチレン<br>C<sub>2</sub>H<sub>2</sub></td>
-                        <td>---------→</td>
-                        <td rowspan="2">(<span class="cloze">アクリロニトリル</span>) <br>
-                            (<span class="cloze">CH2=CHCN</span>)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>(<span class="cloze">HCN</span>)を付加</td>
-                    </tr>
-
-                    <tr>
-                        <td rowspan="2">アセチレン<br>C<sub>2</sub>H<sub>2</sub></td>
-                        <td>---------→</td>
-                        <td rowspan="2"><span class="cloze">(ポリアセチレン)</span> <br>
-                            <span class="cloze">(-[CH=CH]n-)</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>(<span class="cloze">付加重合</span>)させる</td>
-                    </tr>
-
-                    <tr>
-                        <td rowspan="3">アセチレン<br>C<sub>2</sub>H<sub>2</sub></td>
-                        <td>触媒：(<span class="cloze">HgCl2</span>)</td>
-                        <td rowspan="3">(<span class="cloze">塩化ビニル</span>) <br>
-                            (<span class="cloze">CH2=CHCl</span>)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>---------→</td>
-                    </tr>
-                    <tr>
-                        <td>(<span class="cloze">HCl</span>)を付加</td>
-                    </tr>
-
-                    <tr>
-                        <td rowspan="3">アセチレン<br>C<sub>2</sub>H<sub>2</sub></td>
-                        <td>触媒：(<span class="cloze">(CH3COO)2Zn</span>)</td>
-                        <td rowspan="3">(<span class="cloze">酢酸ビニル</span>) <br>
-                            (<span class="cloze">CH2=CHOCOCH3</span>)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>---------→</td>
-                    </tr>
-                    <tr>
-                        <td>(<span class="cloze">CH3COOH</span>)を付加</td>
-                    </tr>
-
-                    <tr>
-                        <td rowspan="3">アセチレン<br>C<sub>2</sub>H<sub>2</sub></td>
-                        <td>触媒：(赤熱した<span class="cloze">Fe</span>)</td>
-                        <td rowspan="3">(<span class="cloze">ベンゼン</span>) <br>
-                            (<span class="cloze">C6H6</span>)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>---------→</td>
-                    </tr>
-                    <tr>
-                        <td>(<span class="cloze">重合</span>)</td>
-                    </tr>
-
-                    <tr>
-                        <td rowspan="2">アセチレン<br>C<sub>2</sub>H<sub>2</sub></td>
-                        <td>---------→</td>
-                        <td rowspan="2">(<span class="cloze">1,2-ジブロモエチレン</span>) <br>
-                            (<span class="cloze">CHBr=CHBr</span>)
-                        </td>
-                        <td>---------→</td>
-                        <td rowspan="2">(<span class="cloze">1,1,2,2-テトラブロモエタン</span>)<br>
-                            (<span class="cloze">CHBr2CHBr2</span>)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>(<span class="cloze">Br2</span>)を付加：(<span class="cloze">臭素</span>)化</td>
-                        <td>すぐに変化</td>
-                    </tr>
-
-                    <tr>
-                        <td rowspan="3">アセチレン<br>C<sub>2</sub>H<sub>2</sub></td>
-                        <td>触媒：(<span class="cloze">Pt</span>)または(<span class="cloze">Ni</span>)</td>
-                        <td rowspan="3">(<span class="cloze">エチレン</span>) <br>
-                            (<span class="cloze">CH2=CH2</span>)
-                        </td>
-                        <td>触媒：(<span class="cloze">Pt</span>)または(<span class="cloze">Ni</span>)</td>
-                        <td rowspan="3">(<span class="cloze">エタン</span>) <br>
-                            (<span class="cloze">CH3CH3</span>)
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>---------→</td>
-                        <td>---------→</td>
-                    </tr>
-                    <tr>
-                        <td>(<span class="cloze">H2</span>)を付加</td>
-                        <td>(<span class="cloze">H2</span>)を付加</td>
-                    </tr>
-
-                    <tr>
-                        <td rowspan="3">アセチレン<br>C<sub>2</sub>H<sub>2</sub></td>
-                        <td>触媒：(<span class="cloze">HgSO4</span>)</sub></td>
-                        <td rowspan="3">(<span class="cloze">ビニルアルコール</span>)<br>
-                            (<span class="cloze">CH2=CHOH</span>)</td>
-                        <td>　</td>
-                        <td rowspan="3">(<span class="cloze">アセトアルデヒド</span>) <br>
-                            (<span class="cloze">CH3CHO</span>)
-
-                    </tr>
-                    <tr>
-                        <td>---------→</td>
-                        <td>---------→</td>
-                    </tr>
-                    <tr>
-                        <td>(<span class="cloze">H2O</span>)を付加</td>
-                        <td>(<span class="cloze">不安定</span>)ですぐに変化</td>
-                    </tr>
-                </table>
-            </div>
+            <nav class="nav" id="nav">
+                <ul class="nav-list">
+                    <li><a href="../index.html#works">有機化学</a></li>
+                    <li><a href="https://study.kikuchan-code.workers.dev/">ホームにもどる</a></li>
+                </ul>
+            </nav>
         </div>
+    </header>
+
+    <main class="main-content">
+        <section class="section">
+            <div class="container">
+
+                <nav class="breadcrumb" aria-label="パンくずリスト">
+                    <a href="https://study.kikuchan-code.workers.dev/">教材置き場</a> &gt; <a href="../index.html">化学</a> &gt; <span>アセチレンの反応まとめ</span>
+                </nav>
+
+                <h2 class="section-title">アセチレンの反応まとめ</h2>
+
+                <div class="table-wrap">
+                <table class="reaction-table">
+                <tr>
+                <td rowspan="2">(<span class="cloze">炭化カルシウム</span>)<br>
+                (<span class="cloze">カーバイド</span>)：別名<br>
+                (<span class="cloze">CaC2</span>)</td>
+                <td>---------→</td>
+                <td rowspan="2">アセチレン<br>C<sub>2</sub>H<sub>2</sub>
+                </td>
+                </tr>
+                <tr>
+                <td>(<span class="cloze">H2O</span>)を付加</td>
+                </tr>
+                <tr>
+                <td rowspan="2">アセチレン<br>C<sub>2</sub>H<sub>2</sub></td>
+                <td>---------→</td>
+                <td rowspan="2">(<span class="cloze">アクリロニトリル</span>) <br>
+                (<span class="cloze">CH2=CHCN</span>)
+                </td>
+                </tr>
+                <tr>
+                <td>(<span class="cloze">HCN</span>)を付加</td>
+                </tr>
+                <tr>
+                <td rowspan="2">アセチレン<br>C<sub>2</sub>H<sub>2</sub></td>
+                <td>---------→</td>
+                <td rowspan="2">(<span class="cloze">ポリアセチレン</span>) <br>
+                (<span class="cloze">-[CH=CH]n-</span>)
+                </td>
+                </tr>
+                <tr>
+                <td>(<span class="cloze">付加重合</span>)させる</td>
+                </tr>
+                <tr>
+                <td rowspan="3">アセチレン<br>C<sub>2</sub>H<sub>2</sub></td>
+                <td>触媒：(<span class="cloze">HgCl2</span>)</td>
+                <td rowspan="3">(<span class="cloze">塩化ビニル</span>) <br>
+                (<span class="cloze">CH2=CHCl</span>)
+                </td>
+                </tr>
+                <tr>
+                <td>---------→</td>
+                </tr>
+                <tr>
+                <td>(<span class="cloze">HCl</span>)を付加</td>
+                </tr>
+                <tr>
+                <td rowspan="3">アセチレン<br>C<sub>2</sub>H<sub>2</sub></td>
+                <td>触媒：(<span class="cloze">(CH3COO)2Zn</span>)</td>
+                <td rowspan="3">(<span class="cloze">酢酸ビニル</span>) <br>
+                (<span class="cloze">CH2=CHOCOCH3</span>)
+                </td>
+                </tr>
+                <tr>
+                <td>---------→</td>
+                </tr>
+                <tr>
+                <td>(<span class="cloze">CH3COOH</span>)を付加</td>
+                </tr>
+                <tr>
+                <td rowspan="3">アセチレン<br>C<sub>2</sub>H<sub>2</sub></td>
+                <td>触媒：(赤熱した<span class="cloze">Fe</span>)</td>
+                <td rowspan="3">(<span class="cloze">ベンゼン</span>) <br>
+                (<span class="cloze">C6H6</span>)
+                </td>
+                </tr>
+                <tr>
+                <td>---------→</td>
+                </tr>
+                <tr>
+                <td>(<span class="cloze">重合</span>)</td>
+                </tr>
+                <tr>
+                <td rowspan="2">アセチレン<br>C<sub>2</sub>H<sub>2</sub></td>
+                <td>---------→</td>
+                <td rowspan="2">(<span class="cloze">1,2-ジブロモエチレン</span>) <br>
+                (<span class="cloze">CHBr=CHBr</span>)
+                </td>
+                <td>---------→</td>
+                <td rowspan="2">(<span class="cloze">1,1,2,2-テトラブロモエタン</span>)<br>
+                (<span class="cloze">CHBr2CHBr2</span>)
+                </td>
+                </tr>
+                <tr>
+                <td>(<span class="cloze">Br2</span>)を付加：(<span class="cloze">臭素</span>)化</td>
+                <td>すぐに変化</td>
+                </tr>
+                <tr>
+                <td rowspan="3">アセチレン<br>C<sub>2</sub>H<sub>2</sub></td>
+                <td>触媒：(<span class="cloze">Pt</span>)または(<span class="cloze">Ni</span>)</td>
+                <td rowspan="3">(<span class="cloze">エチレン</span>) <br>
+                (<span class="cloze">CH2=CH2</span>)
+                </td>
+                <td>触媒：(<span class="cloze">Pt</span>)または(<span class="cloze">Ni</span>)</td>
+                <td rowspan="3">(<span class="cloze">エタン</span>) <br>
+                (<span class="cloze">CH3CH3</span>)
+                </td>
+                </tr>
+                <tr>
+                <td>---------→</td>
+                <td>---------→</td>
+                </tr>
+                <tr>
+                <td>(<span class="cloze">H2</span>)を付加</td>
+                <td>(<span class="cloze">H2</span>)を付加</td>
+                </tr>
+                <tr>
+                <td rowspan="3">アセチレン<br>C<sub>2</sub>H<sub>2</sub></td>
+                <td>触媒：(<span class="cloze">HgSO4</span>)</td>
+                <td rowspan="3">(<span class="cloze">ビニルアルコール</span>)<br>
+                (<span class="cloze">CH2=CHOH</span>)</td>
+                <td>　</td>
+                <td rowspan="3">(<span class="cloze">アセトアルデヒド</span>) <br>
+                (<span class="cloze">CH3CHO</span>)
+                </td></tr>
+                <tr>
+                <td>---------→</td>
+                <td>---------→</td>
+                </tr>
+                <tr>
+                <td>(<span class="cloze">H2O</span>)を付加</td>
+                <td>(<span class="cloze">不安定</span>)ですぐに変化</td>
+                </tr>
+                </table>
+                </div>
+
+            </div>
+        </section>
     </main>
 
+    <button id="toTopBtn" class="to-top-btn" title="上へ戻る">
+        <span aria-hidden="true" class="to-top-icon"></span>
+    </button>
+
+    <script src="../script.js"></script>
 </body>
 
 </html>

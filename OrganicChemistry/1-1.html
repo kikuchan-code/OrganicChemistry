@@ -1,282 +1,100 @@
 <!DOCTYPE html>
 <html lang="ja">
 
-<!DOCTYPE html>
-<html lang="ja">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>官能基テスト</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="quiz.css">
+    <!-- 標準的なファビコン（16x16 / 32x32など） -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.ico">
 
-    <style>
-        :root {
-            --main: #6167ee;
-            --main-dark: #46487c;
-            --bg: #f5f7fb;
-            --card: #ffffff;
-            --border: #dfe5ec;
-            --correct-bg: #d4edda;
-            --correct-border: #28a745;
-            --wrong-bg: #f8d7da;
-            --wrong-border: #dc3545;
-            --show-answer-bg: #cfe2ff;
-            --show-answer-border: #4d8dff;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: var(--bg);
-            color: #222;
-        }
-
-        h1 {
-            margin: 0;
-            font-size: 1.4rem;
-        }
-
-        .top-bar {
-            margin-bottom: 20px;
-        }
-
-        .top-bar h1 {
-            margin: 10px 0 0;
-            font-size: 1.5rem;
-        }
-
-        .back-link {
-            color: var(--main);
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: bold;
-        }
-
-        .back-link:hover {
-            color: var(--main-dark);
-            text-decoration: underline;
-        }
-
-        main {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 16px;
-        }
-
-        .card {
-            background: var(--card);
-            border-radius: 16px;
-            padding: 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-        }
-
-        .description {
-            margin-bottom: 18px;
-            line-height: 1.7;
-        }
-
-        .controls {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            align-items: center;
-            margin-bottom: 18px;
-        }
-
-        .controls-group {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: #f7f9fc;
-            padding: 10px 14px;
-            border-radius: 12px;
-        }
-
-        input[type="number"] {
-            width: 60px;
-            padding: 6px;
-        }
-
-        button {
-            border: none;
-            background: var(--main);
-            color: white;
-            padding: 10px 16px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 0.95rem;
-            transition: 0.2s;
-        }
-
-        button:hover {
-            background: var(--main-dark);
-            transform: translateY(-1px);
-        }
-
-        .table-wrap {
-            overflow-x: auto;
-            border-radius: 12px;
-        }
-
-        table {
-            width: 100%;
-            min-width: 1200px;
-            border-collapse: collapse;
-
-            /* 追加 */
-            table-layout: fixed;
-        }
-
-        th,
-        td {
-            border: 1px solid var(--border);
-            padding: 10px;
-            text-align: center;
-
-            /* 追加 */
-            word-break: break-word;
-        }
-
-        th {
-            background: var(--main);
-            color: white;
-
-            /* stickyやめる */
-            position: static;
-        }
-
-        input[type="text"] {
-            width: 100%;
-            min-width: 90px;
-            padding: 8px;
-            border: 2px solid #ccc;
-            border-radius: 8px;
-            font-size: 0.95rem;
-        }
-
-        input.correct {
-            background: var(--correct-bg);
-            border-color: var(--correct-border);
-        }
-
-        input.wrong {
-            background: var(--wrong-bg);
-            border-color: var(--wrong-border);
-        }
-
-        input.show-answer {
-            background: #cfe2ff;
-            border-color: #4d8dff;
-        }
-
-        .footer-note {
-            margin-top: 16px;
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        @media (max-width: 800px) {
-
-            main {
-                padding: 10px;
-            }
-
-            .controls {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .controls-group {
-                justify-content: space-between;
-            }
-
-            button {
-                width: 100%;
-            }
-
-            th,
-            td {
-                font-size: 0.85rem;
-                padding: 8px;
-            }
-        }
-    </style>
+    <!-- Apple Touch Icon (iPhoneなど) -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 </head>
 
-<body>
+<body class="quiz-page">
 
-    <main>
+    <header class="header">
+        <div class="header-inner">
+            <a href="https://study.kikuchan-code.workers.dev/" class="logo">
+                <p class="logo-subtitle">高専生の基礎学習をサポート</p>
+                <span class="logo-title">Base Study Hub <em class="logo-em">KOSEN</em></span>
+            </a>
 
+            <button class="hamburger" id="hamburger" aria-label="メニューを開く">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
 
+            <nav class="nav" id="nav">
+                <ul class="nav-list">
+                    <li><a href="../index.html#works">有機化学</a></li>
+                    <li><a href="https://study.kikuchan-code.workers.dev/">ホームにもどる</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-        <div class="card">
+    <main class="main-content">
+        <section class="section">
+            <div class="container">
 
-            <div class="top-bar">
-                <a href="../index.html" class="back-link">
-                    ← TOP
-                </a>
+                <nav class="breadcrumb" aria-label="パンくずリスト">
+                    <a href="https://study.kikuchan-code.workers.dev/">教材置き場</a> &gt; <a href="../index.html">化学</a>
+                    &gt; <span>官能基テスト</span>
+                </nav>
 
-                <h1>官能基テスト</h1>
-            </div>
+                <h2 class="section-title">官能基テスト</h2>
 
-            <div class="description">
-                R<sup>m</sup>, R<sub>n</sub> は
-                <strong>Rm</strong>, <strong>Rn</strong>
-                と入力してください。<br>
-                炭化水素類は <strong>R</strong> と表します。
-            </div>
-
-            <div class="controls">
-
-                <div class="controls-group">
-                    <label for="hole-count">1行あたりの穴の数</label>
-                    <input type="number" id="hole-count" min="1" max="5" value="1">
+                <div class="description">
+                    R<sub>1</sub>, R<sub>2</sub> は <strong>R1</strong>, <strong>R2</strong> と入力してください。<br>
+                    炭化水素類は <strong>R</strong> と表します。
                 </div>
 
-                <button id="randomize-button">
-                    ランダム出題
-                </button>
+                <div class="controls">
+                    <div class="controls-group">
+                        <label for="hole-count">1行あたりの穴の数</label>
+                        <input type="number" id="hole-count" min="1" max="6" value="1">
+                    </div>
+                    <div class="buttons">
+                        <button type="button" id="blank-button">虫食いにする</button>
+                        <button type="button" id="check-button">正誤判定</button>
+                        <button type="button" id="show-answers-button">正解表示</button>
+                    </div>
+                    <div id="score-result" class="score" role="status" aria-live="polite"></div>
+                </div>
 
-                <button id="check-answers-button">
-                    正誤判定
-                </button>
-
-                <button id="show-answers-button">
-                    正解表示
-                </button>
+                <div class="table-wrap">
+                    <table id="functional-groups-table" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>官能基</th>
+                                <th>構造式</th>
+                                <th>化合物名</th>
+                                <th>化合物構造</th>
+                                <th>代表例</th>
+                                <th>代表構造</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+                <p class="footer-note">入力後「正誤判定」で採点できます。</p>
 
             </div>
-
-            <div class="table-wrap">
-                <table id="functional-groups-table">
-
-                    <thead>
-                        <tr>
-                            <th>官能基</th>
-                            <th>構造式</th>
-                            <th>化合物名</th>
-                            <th>化合物構造</th>
-                            <th>代表例</th>
-                            <th>代表構造</th>
-                        </tr>
-                    </thead>
-
-                    <tbody></tbody>
-
-                </table>
-            </div>
-            <div class="footer-note">
-                入力後「正誤判定」で採点できます。
-            </div>
-
-        </div>
-
+        </section>
     </main>
 
+    <button id="toTopBtn" class="to-top-btn" title="上へ戻る">
+        <span aria-hidden="true" class="to-top-icon"></span>
+    </button>
+
+    <script src="../script.js"></script>
+    <script src="quiz.js"></script>
     <script>
         const data = [
             {
@@ -362,14 +180,13 @@
         ];
 
         const tableBody = document.querySelector('#functional-groups-table tbody');
-        const holeCountInput = document.getElementById('hole-count');
-        const shuffleRowsCheckbox = document.getElementById('shuffle-rows');
-        const randomizeButton = document.getElementById('randomize-button');
-        const checkAnswersButton = document.getElementById('check-answers-button');
-        const showAnswersButton = document.getElementById('show-answers-button');
+
+        // ヒドロキシ基の行（アルコール／フェノール類）を区別するための重要列
+        // 2:化合物名  4:代表例  5:代表構造
+        const protectedCols = [2, 4, 5];
 
         function createTable() {
-            tableBody.innerHTML = ''; // テーブルをリセット
+            tableBody.innerHTML = '';
             data.forEach(item => {
                 const row = document.createElement('tr');
                 Object.values(item).forEach(text => {
@@ -381,154 +198,36 @@
             });
         }
 
-        function shuffleArray(array) {
-            for (let i = array.length - 1; i > 0; i--) {
-                const j = Math.floor(Math.random() * (i + 1));
-                [array[i], array[j]] = [array[j], array[i]];
-            }
+        function maxHoles() {
+            return window.matchMedia('(max-width:800px)').matches ? 5 : 6;
         }
 
-       function randomizeHoles() {
+        function buildBlanks() {
+            const holeCount = Quiz.readInt('hole-count', 1, maxHoles(), 1);
 
-    const holeCount = parseInt(holeCountInput.value, 10);
+            createTable();
 
-    createTable();
+            Array.from(tableBody.rows).forEach((row, rowIndex) => {
+                const item = data[rowIndex];
+                const cells = Array.from(row.cells);
+                const hiddenCols = [];
 
-    tableBody.querySelectorAll('tr').forEach((row, rowIndex) => {
+                for (const index of Quiz.shuffle([0, 1, 2, 3, 4, 5])) {
+                    if (hiddenCols.length >= holeCount) break;
 
-        const item = data[rowIndex];
+                    // ヒドロキシ基だけ特別ルール：重要列を全部穴にするのは禁止
+                    if (item.name === 'ヒドロキシ基' && protectedCols.includes(index)) {
+                        const hiddenProtected = hiddenCols.filter(x => protectedCols.includes(x));
+                        if (hiddenProtected.length >= protectedCols.length - 1) continue;
+                    }
 
-        const cells = Array.from(row.children);
-
-        const indices = [0, 1, 2, 3, 4, 5];
-
-        shuffleArray(indices);
-
-        let holesMade = 0;
-
-        const hiddenCols = [];
-
-        // ヒドロキシ基を区別するための重要列
-        const protectedCols = [2, 4, 5];
-        // 2:化合物名
-        // 4:代表例
-        // 5:代表構造
-
-        for (const index of indices) {
-
-            if (holesMade >= holeCount) break;
-
-            // ヒドロキシ基だけ特別ルール
-            if (item.name === 'ヒドロキシ基') {
-
-                const hiddenProtected =
-                    hiddenCols.filter(x =>
-                        protectedCols.includes(x)
-                    );
-
-                // protectedColsを全部穴にするのは禁止
-                if (
-                    protectedCols.includes(index) &&
-                    hiddenProtected.length >= protectedCols.length - 1
-                ) {
-                    continue;
-                }
-            }
-
-            const cell = cells[index];
-
-            const originalText = cell.textContent;
-
-            cell.innerHTML =
-                `<input type="text" data-answer="${originalText}" />`;
-
-            const input = cell.querySelector('input');
-
-            function resize() {
-
-                const temp = document.createElement('span');
-
-                temp.style.visibility = 'hidden';
-                temp.style.position = 'absolute';
-                temp.style.whiteSpace = 'pre';
-
-                temp.style.font =
-                    getComputedStyle(input).font;
-
-                temp.textContent =
-                    input.value || originalText || " ";
-
-                document.body.appendChild(temp);
-
-                input.style.width =
-                    `${temp.offsetWidth + 32}px`;
-
-                temp.remove();
-            }
-
-            input.addEventListener('input', resize);
-
-            input.resizeInput = resize;
-
-            resize();
-
-            hiddenCols.push(index);
-
-            holesMade++;
-        }
-    });
-}
-        function checkAnswers() {
-
-            tableBody.querySelectorAll('input').forEach(input => {
-
-                const answer =
-                    input.getAttribute('data-answer');
-
-                input.classList.remove(
-                    'correct',
-                    'wrong',
-                    'show-answer'
-                );
-
-                if (input.value === answer) {
-
-                    input.classList.add('correct');
-
-                } else {
-
-                    input.classList.add('wrong');
+                    Quiz.makeInput(cells[index]);
+                    hiddenCols.push(index);
                 }
             });
         }
 
-        function showAnswers() {
-
-            tableBody.querySelectorAll('input').forEach(input => {
-
-                const answer =
-                    input.getAttribute('data-answer');
-
-                if (input.value !== answer) {
-
-                    input.value = answer;
-
-                    input.resizeInput();
-
-                    input.classList.remove(
-                        'correct',
-                        'wrong'
-                    );
-
-                    input.classList.add('show-answer');
-                }
-            });
-        }
-        randomizeButton.addEventListener('click', randomizeHoles);
-        checkAnswersButton.addEventListener('click', checkAnswers);
-        showAnswersButton.addEventListener('click', showAnswers);
-
-        // ページロード時にテーブルを初期化
+        Quiz.init(buildBlanks);
         createTable();
     </script>
 </body>

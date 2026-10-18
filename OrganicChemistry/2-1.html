@@ -2,590 +2,207 @@
 <html lang="ja">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>脂肪族炭化水素のいろは</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>官能基テスト</title>
+    <link rel="stylesheet" href="../style.css">
+    <link rel="stylesheet" href="quiz.css">
+    <!-- 標準的なファビコン（16x16 / 32x32など） -->
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.ico">
 
-    <style>
-        :root {
-            --main: #6167ee;
-            --main-dark: #46487c;
-            --bg: #f5f7fb;
-            --card: #ffffff;
-            --border: #dfe5ec;
-            --correct-bg: #d4edda;
-            --correct-border: #28a745;
-            --wrong-bg: #f8d7da;
-            --wrong-border: #dc3545;
-            --show-answer-bg: #cfe2ff;
-            --show-answer-border: #4d8dff;
-        }
-
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            font-family: Arial, sans-serif;
-            background: var(--bg);
-            color: #222;
-        }
-
-
-        h1 {
-            margin: 0;
-            font-size: 1.4rem;
-        }
-
-        .top-bar {
-            margin-bottom: 20px;
-        }
-
-        .top-bar h1 {
-            margin: 10px 0 0;
-            font-size: 1.5rem;
-        }
-
-        .back-link {
-            color: var(--main);
-            text-decoration: none;
-            font-size: 0.95rem;
-            font-weight: bold;
-        }
-
-        .back-link:hover {
-            text-decoration: underline;
-        }
-
-        main {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 16px;
-        }
-
-        .card {
-            background: var(--card);
-            border-radius: 18px;
-            padding: 20px;
-
-            box-shadow:
-                0 2px 10px rgba(0, 0, 0, 0.05),
-                0 10px 24px rgba(0, 0, 0, 0.04);
-        }
-
-        .controls {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            align-items: center;
-
-            margin-bottom: 20px;
-        }
-
-        .controls-group {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            background: #f7f9fc;
-            padding: 10px 14px;
-            border-radius: 12px;
-        }
-
-        select,
-        input[type="number"] {
-            padding: 8px 10px;
-            border-radius: 8px;
-            border: 1px solid #ccc;
-            font-size: 0.95rem;
-        }
-
-        .buttons {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
-
-        button {
-            border: none;
-            background: var(--main);
-            color: white;
-
-            padding: 10px 16px;
-            border-radius: 10px;
-
-            cursor: pointer;
-            font-size: 0.95rem;
-
-            transition:
-                background 0.2s,
-                transform 0.15s;
-        }
-
-        button:hover {
-            background: var(--main-dark);
-            transform: translateY(-1px);
-        }
-
-        button:active {
-            transform: scale(0.98);
-        }
-
-        .table-wrap {
-            overflow-x: auto;
-            -webkit-overflow-scrolling: touch;
-
-            border-radius: 14px;
-        }
-
-        table {
-            width: 100%;
-            min-width: 1200px;
-
-            border-collapse: collapse;
-            table-layout: fixed;
-
-            background: white;
-        }
-
-        th,
-        td {
-            border: 1px solid var(--border);
-            padding: 12px;
-            word-break: break-word;
-        }
-
-        th {
-            background: var(--main);
-            color: white;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        td {
-            background: #fff;
-            text-align: left;
-        }
-
-        th:nth-child(1),
-        td:nth-child(1) {
-            width: 15%;
-        }
-
-        th:nth-child(2),
-        td:nth-child(2) {
-            width: 15%;
-        }
-
-        th:nth-child(3),
-        td:nth-child(3) {
-            width: 25%;
-        }
-
-        th:nth-child(4),
-        td:nth-child(4) {
-            width: 45%;
-        }
-
-        input[type="text"] {
-            width: clamp(100px, 80%, 200px);
-            padding: 8px 10px;
-
-            border: 2px solid #ccc;
-            border-radius: 8px;
-
-            font-size: 0.95rem;
-            text-align: center;
-
-            transition:
-                border-color 0.2s,
-                background 0.2s;
-        }
-
-        input[type="text"]:focus {
-            outline: none;
-            border-color: var(--main);
-        }
-
-        input.correct {
-            background: var(--correct-bg);
-            border-color: var(--correct-border);
-        }
-
-        input.wrong {
-            background: var(--wrong-bg);
-            border-color: var(--wrong-border);
-        }
-
-        input.show-answer {
-            background: #cfe2ff;
-            border-color: #4d8dff;
-        }
-
-        .footer-note {
-            margin-top: 16px;
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        @media (max-width: 800px) {
-
-            main {
-                padding: 10px;
-            }
-
-            .controls {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .controls-group {
-                justify-content: space-between;
-            }
-
-            .buttons {
-                width: 100%;
-                flex-direction: column;
-            }
-
-            button {
-                width: 100%;
-            }
-
-            th,
-            td {
-                font-size: 0.85rem;
-                padding: 8px;
-            }
-        }
-    </style>
+    <!-- Apple Touch Icon (iPhoneなど) -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 </head>
 
-<body>
-    <main>
-        <div class="card">
+<body class="quiz-page">
 
-            <a href="../index.html" class="back-link">
-                ← TOP
+    <header class="header">
+        <div class="header-inner">
+            <a href="https://study.kikuchan-code.workers.dev/" class="logo">
+                <p class="logo-subtitle">高専生の基礎学習をサポート</p>
+                <span class="logo-title">Base Study Hub <em class="logo-em">KOSEN</em></span>
             </a>
-            <div class="top-bar">
-                <h1>脂肪族炭化水素のいろは</h1>
-            </div>
-            <div class="controls">
 
-                <div class="controls-group">
-                    <label>
-                        <input type="checkbox" id="shuffleRows">
-                        ランダムに行を入れ替える
-                    </label>
-                </div>
+            <button class="hamburger" id="hamburger" aria-label="メニューを開く">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
 
-                <div class="controls-group">
-                    <select id="languageSelect">
-                        <option value="jp">呼び名（日本語）を虫食い</option>
-                        <option value="en">呼び名（英語）を虫食い</option>
-                    </select>
-                </div>
-
-                <div class="buttons">
-                    <button onclick="applyBlanks()">虫食いにする</button>
-                    <button onclick="checkAnswers()">正誤判定</button>
-                    <button onclick="showCorrectAnswers()">正解表示</button>
-                </div>
-
-            </div>
-
-            <div class="table-wrap">
-
-                <table>
-                    <thead>
-                        <tr>
-                            <th>呼び名（日本語）</th>
-                            <th>呼び名（英語）</th>
-                            <th>一般式</th>
-                            <th>説明</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-
-                        <tr>
-                            <td><span class="blank jp">アルカン</span></td>
-                            <td><span class="blank en">alkane</span></td>
-
-                            <td>
-                                C<sub>n</sub>H<sub><span class="blank">2n+2</span></sub>
-                                (n ≥ <span class="blank">1</span>)
-                            </td>
-
-                            <td>
-                                <span class="blank">単結合のみ</span>をもつ
-                                <span class="blank">飽和</span>炭化水素。
-                                <span class="blank">メタン</span>系炭化水素とも。<br>
-
-                                n ≥ <span class="blank">5</span>の場合、
-                                「(接頭語-<span class="blank">a</span>)+
-                                <span class="blank">ane</span>」で命名される。
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td><span class="blank jp">アルケン</span></td>
-                            <td><span class="blank en">alkene</span></td>
-
-                            <td>
-                                C<sub>n</sub>H<sub><span class="blank">2n</span></sub>
-                                (n ≥ <span class="blank">2</span>)
-                            </td>
-
-                            <td>
-                                <span class="blank">二重結合</span>を1つもつ
-                                <span class="blank">不飽和</span>炭化水素。
-                                <span class="blank">エチレン</span>系炭化水素とも。<br>
-
-                                n ≥ <span class="blank">5</span>の場合、
-                                「(接頭語-<span class="blank">a</span>)+
-                                <span class="blank">ene</span>」で命名される。
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td><span class="blank jp">アルキン</span></td>
-                            <td><span class="blank en">alkyne</span></td>
-
-                            <td>
-                                C<sub>n</sub>H<sub><span class="blank">2n-2</span></sub>
-                                (n ≥ <span class="blank">2</span>)
-                            </td>
-
-                            <td>
-                                <span class="blank">三重結合</span>を1つもつ
-                                <span class="blank">不飽和</span>炭化水素。
-                                <span class="blank">アセチレン</span>系炭化水素とも。<br>
-
-                                n ≥ <span class="blank">5</span>の場合、
-                                「(接頭語-<span class="blank">a</span>)+
-                                <span class="blank">yne</span>」で命名される。
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td><span class="blank jp">アルキル基</span></td>
-                            <td><span class="blank en">alkyl</span>基</td>
-
-                            <td>
-                                C<sub>n</sub>H<sub><span class="blank">2n+1</span></sub>
-                                (n ≥ <span class="blank">1</span>)
-                            </td>
-
-                            <td>
-                                アル<span class="blank">カ</span>ンから
-                                <span class="blank">1つの水素原子</span>
-                                を取り除いた構造。<br>
-
-                                n ≥ <span class="blank">5</span>の場合、
-                                「(接頭語-<span class="blank">a</span>)+
-                                <span class="blank">yl</span>基(group)」
-                                で命名される。
-                            </td>
-                        </tr>
-
-                    </tbody>
-                </table>
-
-            </div>
-
-            <div class="footer-note">
-                入力後「正誤判定」で採点できます。
-            </div>
-
+            <nav class="nav" id="nav">
+                <ul class="nav-list">
+                    <li><a href="../index.html#works">有機化学</a></li>
+                    <li><a href="https://study.kikuchan-code.workers.dev/">ホームにもどる</a></li>
+                </ul>
+            </nav>
         </div>
+    </header>
+
+    <main class="main-content">
+        <section class="section">
+            <div class="container">
+
+                <nav class="breadcrumb" aria-label="パンくずリスト">
+                    <a href="https://study.kikuchan-code.workers.dev/">教材置き場</a> &gt; <a href="../index.html">化学</a> &gt; <span>脂肪族炭化水素のいろは</span>
+                </nav>
+
+                <h2 class="section-title">脂肪族炭化水素のいろは</h2>
+
+                <div class="controls">
+                    <div class="controls-group">
+                        <label><input type="checkbox" id="shuffle-rows"> ランダムに行を入れ替える</label>
+                    </div>
+                    <div class="controls-group">
+                        <select id="language-select">
+                            <option value="jp">呼び名（日本語）を虫食い</option>
+                            <option value="en">呼び名（英語）を虫食い</option>
+                        </select>
+                    </div>
+                    <div class="buttons">
+                        <button type="button" id="blank-button">虫食いにする</button>
+                        <button type="button" id="check-button">正誤判定</button>
+                        <button type="button" id="show-answers-button">正解表示</button>
+                    </div>
+                    <div id="score-result" class="score" role="status" aria-live="polite"></div>
+                </div>
+
+                <div class="table-wrap">
+<table class="data-table left">
+                            <thead>
+                                <tr>
+                                    <th>呼び名（日本語）</th>
+                                    <th>呼び名（英語）</th>
+                                    <th>一般式</th>
+                                    <th>説明</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <tr>
+                                    <td><span class="blank jp">アルカン</span></td>
+                                    <td><span class="blank en">alkane</span></td>
+
+                                    <td>
+                                        C<sub>n</sub>H<sub><span class="blank">2n+2</span></sub>
+                                        (n ≥ <span class="blank">1</span>)
+                                    </td>
+
+                                    <td>
+                                        <span class="blank">単結合のみ</span>をもつ
+                                        <span class="blank">飽和</span>炭化水素。
+                                        <span class="blank">メタン</span>系炭化水素とも。<br>
+
+                                        n ≥ <span class="blank">5</span>の場合、
+                                        「(接頭語-<span class="blank">a</span>)+
+                                        <span class="blank">ane</span>」で命名される。
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><span class="blank jp">アルケン</span></td>
+                                    <td><span class="blank en">alkene</span></td>
+
+                                    <td>
+                                        C<sub>n</sub>H<sub><span class="blank">2n</span></sub>
+                                        (n ≥ <span class="blank">2</span>)
+                                    </td>
+
+                                    <td>
+                                        <span class="blank">二重結合</span>を1つもつ
+                                        <span class="blank">不飽和</span>炭化水素。
+                                        <span class="blank">エチレン</span>系炭化水素とも。<br>
+
+                                        n ≥ <span class="blank">5</span>の場合、
+                                        「(接頭語-<span class="blank">a</span>)+
+                                        <span class="blank">ene</span>」で命名される。
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><span class="blank jp">アルキン</span></td>
+                                    <td><span class="blank en">alkyne</span></td>
+
+                                    <td>
+                                        C<sub>n</sub>H<sub><span class="blank">2n-2</span></sub>
+                                        (n ≥ <span class="blank">2</span>)
+                                    </td>
+
+                                    <td>
+                                        <span class="blank">三重結合</span>を1つもつ
+                                        <span class="blank">不飽和</span>炭化水素。
+                                        <span class="blank">アセチレン</span>系炭化水素とも。<br>
+
+                                        n ≥ <span class="blank">5</span>の場合、
+                                        「(接頭語-<span class="blank">a</span>)+
+                                        <span class="blank">yne</span>」で命名される。
+                                    </td>
+                                </tr>
+
+                                <tr>
+                                    <td><span class="blank jp">アルキル基</span></td>
+                                    <td><span class="blank en">alkyl</span>基</td>
+
+                                    <td>
+                                        C<sub>n</sub>H<sub><span class="blank">2n+1</span></sub>
+                                        (n ≥ <span class="blank">1</span>)
+                                    </td>
+
+                                    <td>
+                                        アル<span class="blank">カ</span>ンから
+                                        <span class="blank">1つの水素原子</span>
+                                        を取り除いた構造。<br>
+
+                                        n ≥ <span class="blank">5</span>の場合、
+                                        「(接頭語-<span class="blank">a</span>)+
+                                        <span class="blank">yl</span>基(group)」
+                                        で命名される。
+                                    </td>
+                                </tr>
+
+                            </tbody>
+                        </table>
+                </div>
+                <p class="footer-note">入力後「正誤判定」で採点できます。</p>
+
+            </div>
+        </section>
     </main>
 
+    <button id="toTopBtn" class="to-top-btn" title="上へ戻る">
+        <span aria-hidden="true" class="to-top-icon"></span>
+    </button>
+
+    <script src="../script.js"></script>
+    <script src="quiz.js"></script>
     <script>
+        const tbody = document.querySelector('tbody');
+        const originalRows = Array.from(tbody.rows);
+        const blanks = Array.from(document.querySelectorAll('.blank'));
 
-        function applyBlanks() {
+        blanks.forEach(b => { b.dataset.answer = b.textContent; });
 
-            const language =
-                document.getElementById('languageSelect').value;
+        Quiz.init(() => {
+            const language = document.getElementById('language-select').value;
+            const shuffleRows = document.getElementById('shuffle-rows').checked;
 
-            const shuffleRows =
-                document.getElementById('shuffleRows').checked;
-
-            resetBlanks();
+            // 中身と行の並びを元に戻す
+            blanks.forEach(b => { b.textContent = b.dataset.answer; });
+            originalRows.forEach(row => tbody.appendChild(row));
 
             if (shuffleRows) {
-                shuffleTableRows();
+                Quiz.shuffle(originalRows.slice()).forEach(row => tbody.appendChild(row));
             }
 
-            toggleBlanks(language);
-        }
-
-        function resetBlanks() {
-
-            const inputs =
-                document.querySelectorAll('input[type="text"]');
-
-            inputs.forEach(input => {
-
-                const originalText =
-                    input.getAttribute('data-original');
-
-                const textNode =
-                    document.createTextNode(originalText);
-
-                input.parentElement.replaceChild(textNode, input);
+            blanks.forEach(b => {
+                const isJp = b.classList.contains('jp');
+                const isEn = b.classList.contains('en');
+                const target = isJp ? language === 'jp' : isEn ? language === 'en' : true;
+                if (target) Quiz.makeInput(b);
             });
-        }
-
-        function shuffleTableRows() {
-
-            const tbody = document.querySelector('tbody');
-
-            const rows =
-                Array.from(tbody.querySelectorAll('tr'));
-
-            for (let i = rows.length - 1; i > 0; i--) {
-
-                const j =
-                    Math.floor(Math.random() * (i + 1));
-
-                [rows[i], rows[j]] =
-                    [rows[j], rows[i]];
-            }
-
-            rows.forEach(row => tbody.appendChild(row));
-        }
-
-        function createInput(blank) {
-
-            const text = blank.textContent;
-
-            const input = document.createElement('input');
-
-            input.type = 'text';
-            input.value = '';
-
-            input.setAttribute('data-original', text);
-
-            function resize() {
-
-                const temp = document.createElement('span');
-
-                temp.style.cssText = `
-    visibility:hidden;
-    position:absolute;
-    white-space:pre;
-    font:${getComputedStyle(input).font};
-`;
-
-                temp.textContent = input.value || text || " ";
-
-                document.body.appendChild(temp);
-
-                input.style.width = `${temp.offsetWidth + 40}px`;
-
-                temp.remove();
-            }
-
-            input.addEventListener('input', resize);
-
-            // 外部からも呼べるよう保存
-            input.resizeInput = resize;
-
-            resize();
-
-            blank.textContent = '';
-            blank.appendChild(input);
-        }
-
-        function toggleBlanks(language) {
-
-            const jpBlanks =
-                document.querySelectorAll('.blank.jp');
-
-            const enBlanks =
-                document.querySelectorAll('.blank.en');
-
-            const otherBlanks =
-                document.querySelectorAll(
-                    '.blank:not(.jp):not(.en)'
-                );
-
-            if (language === 'jp') {
-
-                jpBlanks.forEach(createInput);
-
-            } else {
-
-                enBlanks.forEach(createInput);
-            }
-
-            otherBlanks.forEach(createInput);
-        }
-
-        function checkAnswers() {
-
-            const inputs =
-                document.querySelectorAll('input[type="text"]');
-
-            inputs.forEach(input => {
-
-                const originalText =
-                    input.getAttribute('data-original');
-
-                const answer =
-                    input.value.trim();
-
-                input.classList.remove(
-                    'correct',
-                    'wrong'
-                );
-
-                if (answer === originalText) {
-
-                    input.classList.add('correct');
-
-                } else {
-
-                    input.classList.add('wrong');
-                }
-            });
-        }
-
-        function showCorrectAnswers() {
-
-            const inputs =
-                document.querySelectorAll('input[type="text"]');
-
-            inputs.forEach(input => {
-
-                const originalText =
-                    input.getAttribute('data-original');
-
-                const answer =
-                    input.value.trim();
-
-                input.classList.remove(
-                    'correct',
-                    'wrong',
-                    'show-answer'
-                );
-
-                if (answer !== originalText) {
-
-                    input.value = originalText;
-
-                    // 幅更新
-                    input.resizeInput();
-
-                    input.classList.add('show-answer');
-                }
-            });
-        }
-
+        });
     </script>
-
 </body>
 
 </html>
