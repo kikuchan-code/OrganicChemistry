@@ -117,7 +117,7 @@ ul {
 
 .logo-em {
     font-style: normal;
-    color: var(--color-main);
+    color: var(--color-accent);
 }
 
 /* =========================
@@ -328,7 +328,7 @@ ul {
     place-items: center;
     border: none;
     border-radius: 50%;
-    background: var(--color-main);
+    background: var(--color-accent);
     color: white;
     cursor: pointer;
     opacity: 0;
